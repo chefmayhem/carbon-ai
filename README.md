@@ -28,7 +28,7 @@ To get started with Carbon-AI, follow these steps:
 
 ## License
 
-This project is licensed under a modified MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under a modified MIT License. See the [LICENSE](LICENSE.md) file for details.
 
 ## Contact
 
