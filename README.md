@@ -9,6 +9,8 @@ Welcome to **Carbon-AI**, an open-source tool designed to estimate the carbon im
 - **Open Source**: Modified MIT License for flexibility in deploying this in your own software.
 - **Large Language Model Integration**: Use the power of the latest and greatest AI tools available to evaluate your software's carbon footprint.
 
+- ☁️ **Cloud-Based Technology**: Do you have any components of your tech stack which aren't utilizing the power of the cloud?  Just import this library and you can make any function use cloud resources!
+
 ## Getting Started
 
 To get started with Carbon-AI, follow these steps:
