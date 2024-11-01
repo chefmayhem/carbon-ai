@@ -128,3 +128,71 @@ Things aren't so simple.  So, here's what you'd need to do.
   this library succeeds at being the deep fried diet cola of python libraries.  You want to use
   diet cola so you get fewer calories, but you also deep fried it, negating any benefits by an
   incredible margin.
+
+## What About Water?
+
+* There is this statistic I keep hearing, which is that 3 bottles worth of water are used for
+  every time you ask ChatGPT to write an email (or otherwise 100 words).
+* This has never felt right to me, so I looked into this a bit.
+* The origin of this seems to be [this Washington Post piece](https://www.washingtonpost.com/technology/2024/09/18/energy-ai-use-electricity-water-data-centers/).
+* In that article, water costs per 100-word email are estimated for different states, with Washington
+  being significantly higher than the others, at about 3 half-liter bottles.
+* The article cites [this paper](https://arxiv.org/pdf/2304.03271).
+* That article indicates that 90% of that water usage for the Washington data center is off-site, 
+  that is, from electricity generation.  So, this isn't an issue unique to AI, it is for any
+  activity which uses electricity.
+* I'm fairly surprised at the wide variation in on-site and off-site water use.  I understand that
+  for thermoelectric plants, it is actually preferrable to evaporate cooling water than to
+  release it back into rivers, as the warm water can really mess with ecosystems.  I will assume
+  that all the variation is due to differences in how the plants work, and not discrepancies in
+  data collection, or other errors.
+* You can read more about water use in electricity generation in [this NREL technical report](https://www.nrel.gov/docs/fy04osti/33905.pdf).
+  Interestingly, hydroelectric power here is counted as causing substantial water consumption, mostly
+  because the dam causes a reservoir, which has a large surface area, encouraging evaporation.  That's
+  interesting, but I feel like it is not what we're thinking about.
+* That technical report estimates 1.8L evaporated per kWh of electricity at thermoelectric power plants.
+  That's actually pretty close to the three bottles thing.  But that would seem to imply that nearly
+  a kiloWatt-hour is consumed for every AI-written email.  That seems very wrong.
+* [Goldman Sachs estimates](https://www.goldmansachs.com/insights/articles/AI-poised-to-drive-160-increase-in-power-demand)
+  a single ChatGPT query taking 2.9 Watt-hours of electricity.  At 1.8L/kWh, that's 5.2 mL per query, roughly
+  300 times less than the 1.5L from the Washington Post article.  Now, writing a 100-word email probably takes more than one
+  query, and that's fine.  But that factor of 300, that doesn't seem right.
+* I've spent hours diving down this rabbit hole, and it is possible that I'm just missing something, but
+  I'm reasonably sure that the panic over water use (as the models perform today) is based on some faulty
+  calculations or assumptions, or it is otherwise misleading.
+* All that said, it would certainly help if there were more transparency on data center energy and
+  water use.
+
+## Comparison to other activities
+
+* So, if a single query takes 2.9 Watt-hours of electricity, or 2g CO2, what else does that equate to?
+* Driving an EV [takes 25-60 kWh per hundred miles](https://www.edmunds.com/electric-car/articles/how-much-electricity-does-an-ev-use.html), so 
+  each query is equivalent to driving about 40 feet.
+* For an internal combustion engine, 2 grams is the CO2 emitted from 0.0002 gallons of gasoline.  If your car gets
+  30 mpg, that's about 7 thousandths of a mile, or about 36 feet.
+* I'm rather surprised how close those two numbers are to each other.
+* Streaming a TV show for an hour consumes around 0.08 kWh, so a single query is equivalent to
+  about 2.1 minutes of watching streaming video.
+* That's equivalent to 10 seconds of running my 1000W microwave oven.
+* An Xbox Series X game console runs at [around 150W](https://learn.microsoft.com/en-us/gaming/sustainability/lab-platform-baselines),
+  so a query is equivalent to around 70 seconds of playing a modern video game.
+* 2.9 Watt-hours, run in, say, 2 seconds, equates to around 5200 watts.  That's a lot.  That's between one and
+  two central home air conditioners.  Not something you want to run if you don't need to, but this kind of power
+  is usually for HVAC equipment, not computing.
+* A standard Google search (also according to Goldman Sachs) takes 0.3 Wh electricity.  So, the query is
+  roughly ten times higher than that.
+
+## Observations
+* My above math has not been carefully checked.  Proceed with caution.
+* The three bottles of water thing doesn't really make sense, but water use is
+  worth considering.
+* LLM queries, on their own, aren't unthinkably damaging to the climate, though they can add up.
+  Comparisons to things like cars and video games are interesting.  The carbon emissions and energy
+  use from LLMs are surprisingly high for a simple computing task.
+* Using an LLM for a computing task which could be accomplished with other means is usually very
+  wasteful.
+* Finally, the accuracy of the Carbon-AI model.  It has no accuracy.  This is absolutely an
+  example of using an LLM for no reason other than to claim to be using one.  It uses substantial power
+  and doesn't actually provide accurate results.
+* Obviously, the decisions to estimate environmental impact every time the code is run, rather than a single
+  time during development, is very silly.
