@@ -4,11 +4,12 @@ Welcome to **Carbon-AI**, an open-source tool designed to estimate the carbon im
 
 ## Features
 
-- ⏱️ **Real-Time Analysis**: Get immediate feedback on the carbon impact of your software functions, at run-time!  No need to waste time during development, this all runs in the finished code!
+- ⏱️ **Real-Time Analysis**: Get immediate feedback on the carbon impact of your software functions, at run-time!  No valuable time needs to be wasted during development, everything happens in real-time when the code is executed.
 - 👩‍💻 **Easy Integration**: Seamlessly integrate Carbon-AI into your existing development workflow.
 - 🌎 **Open Source**: Modified MIT License for flexibility in deploying this in your own software.
 - 🤖 **Large Language Model Integration**: Use the power of the latest and greatest AI tools available to evaluate your software's carbon footprint.
 - ☁️ **Cloud-Based Technology**: Do you have any components of your tech stack which aren't utilizing the power of the cloud?  Just import this library and you can make any function use cloud resources!
+
 
 ## Getting Started
 

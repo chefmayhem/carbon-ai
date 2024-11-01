@@ -95,6 +95,9 @@ class CarbonAI:
             # We call the function
             result = func(*args, **kwargs)
 
+            # We get the time after the function is called
+            end_time = time.perf_counter()
+
             # Here's the ChatGPT messsage
             if self.client is not None:
                 response = self.client.chat.completions.create(
@@ -125,9 +128,6 @@ class CarbonAI:
 
             else:
                 raise ValueError("OpenAI client not initialized")
-
-            # We get the time after the function is called
-            end_time = time.perf_counter()
 
             # We calculate the time taken
             time_taken = end_time - start_time
