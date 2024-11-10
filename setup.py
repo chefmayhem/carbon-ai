@@ -7,7 +7,7 @@ setup(
     name="carbon_ai",
     version="0.1.0",
     author="chefmayhem",
-    author_email="your_email@example.com",
+    author_email="nope!",
     description="Use generative AI to calculate carbon emissions",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -15,8 +15,13 @@ setup(
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
+    ],
+    install_requires=[
+        "openai>=1.50",
+        "dataclasses",
+        "logging",
+        "json"
     ],
     python_requires='>=3.10',
 )

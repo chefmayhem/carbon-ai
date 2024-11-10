@@ -141,3 +141,14 @@ class CarbonAI:
             else:
                 return result, response
         return wrapper
+    
+    def back_of_envelope_estimate(self, runtime_s: float):
+        """
+        Use the following very rough assumptions:
+        1. An typical averaged desktop or laptop uses around 60 Watts of power
+        2. The carbon intensity of the US grid is around 0.42 kg CO2 per kWh
+        3. Approximately half of the computer's power is used for the function
+           to be measured, the rest may be OS tasks, other programs, etc.
+        Thus, we estimate the CO2 as 3.5 mg/s * runtime_s
+        """
+        return 0.0035 * runtime_s
