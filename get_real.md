@@ -99,13 +99,13 @@ Things aren't so simple.  So, here's what you'd need to do.
   right to... maybe within a factor of ten.
 * I'll assume the computer is using 60W power.  That's probably high for my laptop, but could
   easily be low for a desktop.
-* I'll assume we have 0.39 kg CO2/kWh.  That comes to 0.23 kg/h, or 65 mg/s.
+* I'll assume we have 0.42 kg CO2/kWh.  That comes to 0.25 kg/h, or 7 mg/s.
 * I'll assume that one half of the power use on the computer comes from my code, and the other
-  half from OS, other programs, etc.  That takes us to 33 mg/s.
-* So, if my program takes one second to run, that corresponds to 33 mg CO2.
+  half from OS, other programs, etc.  That takes us to 3.5 mg/s.
+* So, if my program takes one second to run, that corresponds to 3.5 mg CO2.
 * You can find other calculations online, and we're within an order of magnitude.
 * For the small python program I wrote to find the prime numbers between 400 and 500, which runs
-  on my machine in around 30 microseconds, this corresponds to 1 microgram of CO2.
+  on my machine in around 30 microseconds, this corresponds to 0.1 microgram of CO2.
 
 ## LLM Integration and Impact
 
@@ -134,7 +134,7 @@ Things aren't so simple.  So, here's what you'd need to do.
   query takes 2.9 Watt-hours of electricity.  Much less context here, so I don't know which model version this is, or
   whether amortized training emissions are taken into account.  Within a factor of two, so close enough.
 * Using this Carbon-AI module to "estimate" the CO2 emissions from a function, assuming that 2.2 g/query estimate
-  is correct, produces around 2000 times more emissions than just running the code.
+  is correct, produces around 20000 times more emissions than just running the code.
 * If this is accurate (and I believe it is pretty accurate, to within an order of magnitude or so), then
   this library succeeds at being the deep fried diet cola of python libraries.  You want to use
   diet cola so you get fewer calories, but you also deep fried it, negating any benefits by an
@@ -190,13 +190,15 @@ Things aren't so simple.  So, here's what you'd need to do.
       single-query estimates.  I'm not sure how much of that is due to GPT-4 vs GPT-3, how much is due to the expectation that several queries will be used to
       generate that email, and how much is some other factor.
     * The highest water-use location is where the 3-bottles number comes from, so, Washington, where roughly 90% of the water use is off-site (some might refer
-      to this as scope 2).  This location uses 9.5 L/kWh for electricity generation.  
+      to this as scope 2, from electricity generation).  This location uses 9.5 L/kWh for electricity generation.  
     * The 9.5 L/kWh number is surprising, as that's more vaporization than a single kWh of energy could do to water (1 kWh could vaporize 1.6L already at the 
-      boiling point).  An extremely inefficient thermoelectric generator could still make this happen, but it seems very unlikely to me.
+      boiling point).  An extremely inefficient thermoelectric generator could still make this happen, but it seems very unlikely to me.  The thermal efficiency
+      (how much of the heat becomes electricity for power plants ranges from 33% (nuclear) to 45% (combined-cycle gas)).  That's not enough to explain the difference.
     * I'm forced to conclude that this number is counting reservoir evaporation from hydroelectric dams.  Most electricity in Washington comes from hydroelectric
       generation.  I'm reluctant to count this water loss against AI, because US hydroelectric capacity has been nearly unchanged for over a decade, and
       these reservoirs which accelerate evaporation would be there with or without AI.  Counting these losses adds roughly a factor of 6 over what would be
       expected from thermoelectric plants.
+    * Basically, most of those water use numbers are saying "Look, the Grand Coulee Dam sure made a big reservoir".
     * So, that accounts for roughly a factor of 180 out of the factor of 300 I was initially concerned about.  It brings us back to within a factor of 2, where
       numbers may be reasonable.
     * In summary, that 3 bottles number is mostly from electricity generation, and most of that is reservoir water evaporation.  This isn't to say that fresh water
