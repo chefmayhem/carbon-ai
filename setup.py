@@ -18,10 +18,7 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        "openai>=1.50",
-        "dataclasses",
-        "logging",
-        "json"
+        "openai>=1.50"
     ],
     python_requires='>=3.10',
 )

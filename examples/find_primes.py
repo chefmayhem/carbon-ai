@@ -1,5 +1,4 @@
 import sys
-sys.path.append('../carbon_ai')
 from carbon_ai import CarbonAI
 import logging
 
