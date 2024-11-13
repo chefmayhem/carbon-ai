@@ -1,4 +1,3 @@
-import sys
 from carbon_ai import CarbonAI
 import logging
 

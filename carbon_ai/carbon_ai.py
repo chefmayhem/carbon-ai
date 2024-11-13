@@ -5,6 +5,7 @@
 import time
 import inspect
 import json
+import os
 from functools import wraps
 from openai import OpenAI
 from openai import types as openaitypes
@@ -29,11 +30,38 @@ class CarbonAI:
         self.login_secret = None
         self.login_org = None
         self.login_proj = None
+        self.client = None
         self._debug_mode = False
+        self.successful_login = False
         self._model_name = "gpt-4o-mini"
         self.load_secret("./login_info.json")
-        self.client = OpenAI(api_key=self.login_secret)
-        #self.client = OpenAI(organization=self.login_org, project=self.login_proj)
+        try:
+            self.client = OpenAI(api_key=self.login_secret)
+        except Exception as e:
+            logger.warning("Could not initialize OpenAI client")
+            logger.warning(e)
+            self.client = None
+
+    def reset_login(self,
+                    secret_file: Optional[str] = None,
+                    secret_key: Optional[str] = None,
+                    secret_env: Optional[str] = None,
+                    ):
+        """
+        Reset the OpenAI login information for the CarbonAI class
+        """
+        if secret_file is not None:
+            self.load_secret(secret_file)
+        elif secret_key is not None:
+            self.login_secret = secret_key
+        elif secret_env is not None:
+            self.login_secret = os.getenv(secret_env, None)
+        try:
+            self.client = OpenAI(api_key=self.login_secret)
+        except Exception as e:
+            logger.warning("Could not initialize OpenAI client")
+            logger.warning(e)
+            self.client = None        
 
     def set_model_name(self, model_name):
         """
@@ -49,7 +77,7 @@ class CarbonAI:
 
     def load_secret(self, secret_file):
         """
-        The load_secret function loads the secret from a file
+        The load_secret function loads the secret from a file or env variable
 
         """
         try:
@@ -61,11 +89,26 @@ class CarbonAI:
                     self.login_org = login_dict["org"]
                 if "proj" in login_dict:
                     self.login_proj = login_dict["proj"]
-        except: 
+        except FileNotFoundError: 
             logger.warning("Could not load secret file")
-            self.login_secret = None
-            self.login_org = None
-            self.login_proj = None
+        except PermissionError:
+            logger.warning("Could not read secret file")
+        except json.JSONDecodeError:
+            logger.warning("Could not decode secret file")
+
+
+        if self.login_secret is not None:
+            return
+        
+        try:
+            self.login_secret = os.getenv("OPENAI_API_KEY", None)
+            self.login_org = os.getenv("OPENAI_ORG", None)
+            self.login_proj = os.getenv("OPENAI_PROJ", None)
+        except:
+            logger.warning("Could not load secret from environment variables")
+
+        return
+        
 
     def prepare_input_content(self, func, args, kwargs)->str:
         """
@@ -100,6 +143,12 @@ class CarbonAI:
             # We get the time after the function is called
             end_time = time.perf_counter()
 
+               # We calculate the time taken
+            time_taken = end_time - start_time
+
+            # We print the time taken
+            logger.debug(f"Time taken to run {func.__name__}: {time_taken}")
+
             # Here's the ChatGPT messsage
             if self.client is not None:
                 response = self.client.chat.completions.create(
@@ -129,13 +178,10 @@ class CarbonAI:
                     logger.info(f"Estimated CO2 emissions: {res.g_co2} grams")
 
             else:
-                raise ValueError("OpenAI client not initialized")
-
-            # We calculate the time taken
-            time_taken = end_time - start_time
-
-            # We print the time taken
-            logger.debug(f"Time taken to run {func.__name__}: {time_taken}")
+                logger.warning("OpenAI client not initialized, falling back to back of envelope estimate")
+                boe_estimate = self.back_of_envelope_estimate(time_taken)
+                logger.info(f"Estimated CO2 emissions: {boe_estimate} grams")
+         
 
             # We return the result
             if not self._debug_mode:
