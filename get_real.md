@@ -2,7 +2,8 @@
 
 So, maybe you figured out that this is satire?  I hope so.  Let's go through
 some real calculations to try to get a better understanding of software and 
-its climate impacts!
+its climate impacts!  Please note that, while I made efforts to be accurate here,
+accuracy is not guaranteed, and estimates may be outdated.
 
 ## Doing Everything Right
 
